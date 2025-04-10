@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+
+    # Service MySQL
+  db:
+    image: mysql:5.7
+    container_name: mysql_tokutana
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password  
+      MYSQL_DATABASE: tokutana  
+      MYSQL_PASSWORD: password    
+    networks:
+      - backend
+
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_tokutana
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8090:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: password
+    networks:
+      - backend
+  
+  # Application Laravel
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tokutana
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: tokutana
+      DB_USERNAME: root
+      DB_PASSWORD: password
+    networks:
+      - backend
+    volumes:
+      - .:/var/www
+
+volumes:
+  db_data:
+
+networks:
+  backend:
