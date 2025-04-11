@@ -27,5 +27,6 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 EXPOSE 8000
 
 CMD php artisan key:generate && \
-    php artisan migrate --force --seed && \
+    php artisan migrate --force && \
+    php artisan migrate:refresh --seed && \
     php artisan serve --host=0.0.0.0 --port=8000
