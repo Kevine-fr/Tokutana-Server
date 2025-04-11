@@ -10,7 +10,7 @@ class RelationController extends Controller
 {
     public function Relations(){
         try {
-            $relations = Relation::all();
+            $relations = Relation::latest()->take(15)->get();
 
             if($relations->isEmpty()) {
                 return response()->json([
