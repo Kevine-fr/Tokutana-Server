@@ -230,26 +230,28 @@ class ClientController extends Controller
                 'phone' => $data['phone'],
             ]);
 
-            if ($data['image']) {
-                $image = $data['image'];
+            // if ($data['image']) {
+            //     $image = $data['image'];
                 
-                $uploadResult = CloudinaryFacade::uploadApi()->upload(
-                    $image->getRealPath(),
-                    [
-                        'folder' => 'Tokutana',
-                        'resource_type' => 'auto',
-                    ]
-                );
+            //     $uploadResult = CloudinaryFacade::uploadApi()->upload(
+            //         $image->getRealPath(),
+            //         [
+            //             'folder' => 'Tokutana',
+            //             'resource_type' => 'auto',
+            //         ]
+            //     );
 
-                $url = $uploadResult['secure_url'];
+            //     $url = $uploadResult['secure_url'];
 
-                $uploadedUrls[] = $url;
+            //     $uploadedUrls[] = $url;
 
-                Image::create([
-                    'client_id' => $client->id,
-                    'path' => $url,
-                ]);
-            }
+            //     Image::create([
+            //         'client_id' => $client->id,
+            //         'path' => $url,
+            //     ]);
+            // }
+
+            $data['image'] = null;
 
             $client->relations()->attach($data['relations']);
             $client->centerInterests()->attach($data['centerInterests']);
