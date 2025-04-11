@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\RelationController;
 use App\Http\Controllers\RelationClientController;
+use App\Http\Controllers\CenterInterestController;
 
 # Routes init
 Route::get('/', function () {
@@ -49,6 +50,7 @@ Route::post('/make-like', [LikeController::class, 'MakeLike'])->middleware('jwt.
 Route::post('/make-dislike', [LikeController::class, 'MakeDislike'])->middleware('jwt.auth');
 
 Route::get('/relations', [RelationController::class, 'Relations']);
+Route::get('/center-interests', [CenterInterestController::class, 'CenterInterests']);
 
 Route::post('/add-relation-client', [RelationClientController::class, 'AddRelationClient'])->middleware('jwt.auth');
 
