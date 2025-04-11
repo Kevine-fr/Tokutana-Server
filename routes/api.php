@@ -11,7 +11,7 @@ use App\Http\Controllers\RelationClientController;
 
 # Routes init
 Route::get('/', function () {
-    return response()->json(['message' => 'Hello, API!']);
+    return response()->json(['message' => now()], 200);
 });
 Route::get('/login', function () {
     return response()->json(['message' => "Vous n'êtes pas autorisé à éffectuer cette action !", 'errors' => 'Token invalide ou manquant'], 401);
