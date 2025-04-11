@@ -18,13 +18,17 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install pdo pdo_pgsql pgsql
 
+COPY .env.example /var/www/.env
+
 WORKDIR /var/www
 COPY . .
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-RUN php artisan migrate --force
+RUN php artisan key:generate
+
+RUN php artisan migrate --force --seed
 
 EXPOSE 8000
 
