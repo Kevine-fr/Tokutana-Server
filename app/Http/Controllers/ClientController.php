@@ -27,7 +27,7 @@ class ClientController extends Controller
 
     public function GenerateCode(){
         try {    
-            $code = random_int(100000, 999999);
+            $code = random_int(1000, 9999);
             
             return $code;
         } catch (\Throwable $th) {
