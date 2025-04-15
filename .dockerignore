@@ -1,3 +1,7 @@
 vendor
 .git
 .env
+.devcontainer
+docker-compose.yml
+Dockerfile.dev
+README.md
