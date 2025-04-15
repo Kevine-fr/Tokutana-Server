@@ -8,3 +8,4 @@ class ClientCenterInterestController extends Controller
 {
     //
 }
+
